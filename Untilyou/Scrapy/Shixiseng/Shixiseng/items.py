@@ -14,6 +14,7 @@ class ShixisengItem(Item):
 
     companyName = Field()
     companyUrl = Field()
+    jobDesc = Field()
     jobClass = Field()
     jobName = Field()
     companyAddress = Field()
