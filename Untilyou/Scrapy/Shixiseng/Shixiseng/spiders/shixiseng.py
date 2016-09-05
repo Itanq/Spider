@@ -40,16 +40,12 @@ class ShixisengSpider(Spider):
         sites = sel.xpath('//div[@class="jb_det_left"]')
         for site in sites:
 
+            image_urls = sel.xpath('//div[@class="jb_det_right_top"]/a/img/@src').extract()
             companyName = sel.xpath('//div[@class="jb_det_right"]/div[@class="jb_det_right_top"]/p[1]/a/text()').extract()
             companyUrl = sel.xpath('//div[@class="jb_det_right"]/div[@class="jb_det_right_top"]/p[@class="web_url"]/a/@href').extract()
             jobClass = sel.xpath('//div[@class="jb_det_right"]/div[@class="jb_det_right_top"]/p[@class="domain"]/span/text()').extract()
-            # 只能提取div节点下的第一个自己子节点
-            # jobDesc = site.xpath('.//div[@class="dec_content"]/*/text()').extract()
-            # div 下的文本元素
-            jobDesc = site.xpath('.//div[@class="dec_content"]/text()').extract()
-            # div下的所有子节点的元素
-            jobDesc += site.xpath('.//div[@class="dec_content"]/*').extract()
-            # jobDesc += site.xpath('.//div[@class="dec_content"]/').extract()
+            # 提取div下多个标签的文本内容
+            jobDesc = site.xpath('.//div[@class="dec_content"]').xpath('string()').extract()
             jobName = site.xpath('.//div[@class="jb_det_left_top"]/span[@class="job_name"]/text()').extract()
             companyAddress = site.xpath('.//div[@class="jb_det_left_mid"]/span[@class="city"]/@title').extract()
             workTime = site.xpath('.//div[@class="jb_det_left_mid"]/span[@class="month"]/text()').extract()
@@ -58,6 +54,7 @@ class ShixisengSpider(Spider):
             publicDate = site.xpath('.//div[@class="jb_det_left_top"]/span[@class="update_time"]/text()').extract()
             endDate = site.xpath('.//p[@class="date"]/text()').extract()
 
+            item['image_urls'] = [i.encode('utf-8') for i in image_urls]
             item['companyName'] = [c.encode('utf-8') for c in companyName]
             item['companyUrl'] = [c.encode('utf-8') for c in companyUrl]
             item['jobClass'] = [j.encode('utf-8') for j in jobClass]

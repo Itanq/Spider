@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+#@############3
 # Scrapy settings for Shixiseng project
 #
 # For simplicity, this file contains only settings considered important or
@@ -13,6 +13,7 @@ BOT_NAME = 'Shixiseng'
 
 SPIDER_MODULES = ['Shixiseng.spiders']
 NEWSPIDER_MODULE = 'Shixiseng.spiders'
+IMAGES_STORE='images'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -65,7 +66,8 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'Shixiseng.pipelines.ShixisengPipeline': 300,
+    'Shixiseng.pipelines.ShixisengPipeline': 1, # 300
+    'Shixiseng.pipelines.ImagesPipeline': 1,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
