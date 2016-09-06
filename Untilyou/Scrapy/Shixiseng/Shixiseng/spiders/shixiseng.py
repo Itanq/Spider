@@ -41,7 +41,7 @@ class ShixisengSpider(Spider):
         for site in sites:
 
             image_urls = sel.xpath('//div[@class="jb_det_right_top"]/a/img/@src').extract()
-            companyName = sel.xpath('//div[@class="jb_det_right"]/div[@class="jb_det_right_top"]/p[1]/a/text()').extract()
+            companyName = ''.join(sel.xpath('//div[@class="jb_det_right"]/div[@class="jb_det_right_top"]/p[1]/a/text()').extract())
             companyUrl = sel.xpath('//div[@class="jb_det_right"]/div[@class="jb_det_right_top"]/p[@class="web_url"]/a/@href').extract()
             jobClass = sel.xpath('//div[@class="jb_det_right"]/div[@class="jb_det_right_top"]/p[@class="domain"]/span/text()').extract()
             # 提取div下多个标签的文本内容

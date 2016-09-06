@@ -67,7 +67,9 @@ ROBOTSTXT_OBEY = True
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'Shixiseng.pipelines.ShixisengPipeline': 1, # 300
-    'Shixiseng.pipelines.ImagesPipeline': 1,
+    #'Shixiseng.pipelines.ImagesPipeline': 1,
+    #'Shixiseng.pipelines.JsonWithEncodingPipeline': 1,
+    'Shixiseng.pipelines.DownloadImagesPipeline': 1,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -89,4 +91,4 @@ ITEM_PIPELINES = {
 #HTTPCACHE_EXPIRATION_SECS = 0
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
-#HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+#
