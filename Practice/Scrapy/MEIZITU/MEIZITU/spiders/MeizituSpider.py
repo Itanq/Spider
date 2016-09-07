@@ -32,6 +32,6 @@ class MeizituSpider(scrapy.Spider):
         item = MeizituItem()
         site = sel.xpath('//div[@id="maincontent"]/div/div[@class="metaRight"]')
         item['meiziname'] = site.xpath('.//h2/a/text()').extract()
-        item['tags'] = site.xpath('.//p/text()').extract()
+        item['tags'] = ''.join(site.xpath('.//p/text()').extract())
         item['imageurl'] = sel.xpath('//div[@class="postContent"]/div[@id="picture"]/p/img/@src').extract()
         return item

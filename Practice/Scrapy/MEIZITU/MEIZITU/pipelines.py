@@ -20,7 +20,7 @@ class MeizituPipeline(object):
         self.file.write(line)
         return item
 
-class MyImagesPipeline(ImagesPipeline):
+class DownloadImagesPipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
         for image_url in item['imageurl']:
             yield Request(image_url, meta={'item':item,'index':item['imageurl'].index(image_url)})
@@ -31,3 +31,4 @@ class MyImagesPipeline(ImagesPipeline):
 
         image_guid = item['meiziname'][index] + '.' + request.url.split('/')[-1].split('.')[-1]
         filename = u'full/{0}/{1}'.format(item['tags'], image_guid)
+        return filename

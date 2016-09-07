@@ -18,7 +18,7 @@ NEWSPIDER_MODULE = 'MEIZITU.spiders'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'MEIZITU (+http://www.yourdomain.com)'
 
-ROBOTSTXT_OBEY = True
+#ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS=32
@@ -65,8 +65,9 @@ ROBOTSTXT_OBEY = True
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'MEIZITU.pipelines.MeizituPipeline': 2,
-    'MEIZITU.pipelines.MyImagesPipeline': 1,
+    'MEIZITU.pipelines.DownloadImagesPipeline': 1,
 }
+IMAGES_STORE="Images"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
