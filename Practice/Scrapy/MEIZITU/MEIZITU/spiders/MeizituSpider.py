@@ -1,7 +1,6 @@
 #-*- coding:utf-8 -*-
 
 import scrapy
-
 from scrapy import optional_features
 optional_features.remove('boto')
 
@@ -17,17 +16,22 @@ class MeizituSpider(scrapy.Spider):
             'http://www.meizitu.com/',
     ]
 
+    # 提取主页上的妹子图的个人页面链接
     def parse(self, response):
         sel = Selector(response)
-        links = sel.xpath('//div[@id="maincontent"]/div[@class="postContent"]')
+        links = sel.xpath('//div[@id="maincontent"]/div[@class="postContent"]/div[@id="picture"]/p')
         print("Links: %s " % len(links))
         for link in links:
-            href = link.xpath('.//div[@id="picture"]/p/a/@href').extract()[0]
+            href = link.xpath('.//a/@href').extract()[0]
             print("href: %s " % href)
-            yield Request(link, callback=self.parse_item)
+            yield Request(href, callback=self.parse_item)
 
+    # 处理个人页面上的图片
     def parse_item(self, response):
-        print("Start parse_item")
         sel = Selector(response)
-        images = sel.xpath('//div[@class="postContent"]/div[@id="picture"]')
-        print("len: %s" % len(images))
+        item = MeizituItem()
+        site = sel.xpath('//div[@id="maincontent"]/div/div[@class="metaRight"]')
+        item['meiziname'] = site.xpath('.//h2/a/text()').extract()
+        item['tags'] = site.xpath('.//p/text()').extract()
+        item['imageurl'] = sel.xpath('//div[@class="postContent"]/div[@id="picture"]/p/img/@src').extract()
+        return item
